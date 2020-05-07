@@ -51,9 +51,13 @@ final class MVVMFriendsViewController: UIViewController {
     
     // MARK: - Private
     private func setupUI() {
-        // View
+        // TableView
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.register(UINib(nibName: FriendCell.id, bundle: nil), forCellReuseIdentifier: FriendCell.id)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 90
         
         MBProgressHUD.showAdded(to: view, animated: true)
         
@@ -87,10 +91,11 @@ extension MVVMFriendsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(MVVMFriendTableViewCell.self, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.id, for: indexPath) as! FriendCell
         
         let userVM = viewModel.getCellViewModel(at: indexPath)
-        cell.nameLabel?.text = userVM.name
+        cell.nameLabel.text = userVM.name
+        cell.locationLabel.text = viewModel.getLocation(indexPath: indexPath)
         
         if userVM.image == nil {
             viewModel.loadImage(indexPath: indexPath)

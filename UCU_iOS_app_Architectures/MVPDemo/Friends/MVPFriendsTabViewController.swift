@@ -15,6 +15,8 @@ protocol FriendsPresenterProtocol {
     // Life Cycle
     func viewDidLoad()
     
+    func getLocation(indexPath: IndexPath) -> String
+    
     // DataSource
     var friendsCount: Int { get }
     func getUserByIndexPath(indexPath: IndexPath) -> User
@@ -25,12 +27,7 @@ protocol FriendsPresenterProtocol {
 final class MVPFriendsViewController: UIViewController, FriendsViewProtocol {
     
     // MARK: - IBOutlets
-    @IBOutlet private weak var tableView: UITableView! {
-        didSet {
-            tableView.dataSource = self
-            tableView.delegate = self
-        }
-    }
+    @IBOutlet private weak var tableView: UITableView!
 
     // MARK: - Properties
     private let friendsPresenter = FriendsPresenter()
@@ -44,6 +41,7 @@ final class MVPFriendsViewController: UIViewController, FriendsViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
         friendsPresenter.setViewDelegate(friendsViewProtocol: self)
         friendsPresenter.viewDidLoad()
     }
@@ -68,6 +66,18 @@ final class MVPFriendsViewController: UIViewController, FriendsViewProtocol {
     func reloadData() {
         tableView.reloadData()
     }
+    
+    // MARK: - Private
+    private func setupUI() {
+        
+        // TableView
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.register(UINib(nibName: FriendCell.id, bundle: nil), forCellReuseIdentifier: FriendCell.id)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 90
+    }
 }
 
 //
@@ -79,10 +89,11 @@ extension MVPFriendsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(MVPFriendTableViewCell.self, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.id, for: indexPath) as! FriendCell
         
         let user = friendsPresenter.getUserByIndexPath(indexPath: indexPath)
-        cell.nameLabel?.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        cell.nameLabel.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        cell.locationLabel.text = friendsPresenter.getLocation(indexPath: indexPath)
         
         if let image = user.image {
             cell.avatarImageView.image = image

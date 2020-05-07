@@ -14,12 +14,7 @@ import UIKit
 final class MVCFriendsViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet private weak var tableView: UITableView! {
-        didSet {
-            tableView.dataSource = self
-            tableView.delegate = self
-        }
-    }
+    @IBOutlet private weak var tableView: UITableView!
 
     // MARK: - Properties
     private let userAPIClient = UserAPIClient()
@@ -35,6 +30,7 @@ final class MVCFriendsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
         loadFriends()
     }
     
@@ -51,6 +47,17 @@ final class MVCFriendsViewController: UIViewController {
     }
 
     // MARK: - Private
+    private func setupUI() {
+        
+        // TableView
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.register(UINib(nibName: FriendCell.id, bundle: nil), forCellReuseIdentifier: FriendCell.id)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 90
+    }
+    
     private func loadFriends() {
         userAPIClient.getFriends { (users) in
             self.friends = users
@@ -68,10 +75,21 @@ extension MVCFriendsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(MVCFriendTableViewCell.self, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.id, for: indexPath) as! FriendCell
         
         let user = friends[indexPath.row]
-        cell.nameLabel?.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        cell.nameLabel.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        
+        // SORRY :-((((
+        var text = ""
+        if let city = user.city, let country = user.country {
+            text = "  " + city + ", " + country + "  "
+        } else if let city = user.city {
+            text = "  " + city + "  "
+        } else if let country = user.country {
+            text = "  " + country + "  "
+        }
+        cell.locationLabel.text = text // Sorry for this dummy code :-(
         
         if let image = user.image {
             cell.avatarImageView.image = image

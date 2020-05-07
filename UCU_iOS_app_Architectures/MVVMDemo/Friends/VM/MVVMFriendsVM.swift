@@ -69,6 +69,19 @@ final class MVVMFriendsViewModel {
         reloadTableView.accept(())
     }
     
+    func getLocation(indexPath: IndexPath) -> String {
+        let user = users[indexPath.row]
+        var text = ""
+        if let city = user.city, let country = user.country {
+            text = "  " + city + ", " + country + "  "
+        } else if let city = user.city {
+            text = "  " + city + "  "
+        } else if let country = user.country {
+            text = "  " + country + "  "
+        }
+        return text
+    }
+    
     // MARK: - Private
     private func processFetchesUsers(users: [User]) {
         self.users = users

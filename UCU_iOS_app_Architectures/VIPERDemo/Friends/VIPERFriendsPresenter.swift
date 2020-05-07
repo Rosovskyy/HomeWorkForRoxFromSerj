@@ -21,6 +21,7 @@ protocol VIPERFriendsPresenterProtocol: class {
     func getUserByIndexPath(indexPath: IndexPath) -> User
     func loadImageForUser(indexPath: IndexPath)
     func openFriendDetail(indexPath: IndexPath)
+    func getLocation(indexPath: IndexPath) -> String
 }
 
 //
@@ -77,6 +78,19 @@ class VIPERFriendsPresenter: VIPERFriendsPresenterProtocol {
     
     func openFriendDetail(indexPath: IndexPath) {
         router.openFriendDetail(user: friends[indexPath.row])
+    }
+    
+    func getLocation(indexPath: IndexPath) -> String {
+        let user = friends[indexPath.row]
+        var text = ""
+        if let city = user.city, let country = user.country {
+            text = "  " + city + ", " + country + "  "
+        } else if let city = user.city {
+            text = "  " + city + "  "
+        } else if let country = user.country {
+            text = "  " + country + "  "
+        }
+        return text
     }
     
     // MARK: - Private

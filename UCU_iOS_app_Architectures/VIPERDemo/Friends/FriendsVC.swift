@@ -14,12 +14,7 @@ import UIKit
 class FriendsVC: UIViewController, VIPERFriendsViewProtocol {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.dataSource = self
-            tableView.delegate = self
-        }
-    }
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
     var presenter: VIPERFriendsPresenterProtocol!
@@ -29,6 +24,7 @@ class FriendsVC: UIViewController, VIPERFriendsViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupUI()
         configurator.configure(with: self)
         presenter.configureView()
     }
@@ -41,6 +37,18 @@ class FriendsVC: UIViewController, VIPERFriendsViewProtocol {
     func reloadRow(indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+    
+    // MARK: - Private
+    private func setupUI() {
+        
+        // TableView
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.register(UINib(nibName: FriendCell.id, bundle: nil), forCellReuseIdentifier: FriendCell.id)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 90
+    }
 }
 
 //
@@ -52,10 +60,11 @@ extension FriendsVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(MVPFriendTableViewCell.self, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.id, for: indexPath) as! FriendCell
         
         let user = presenter.getUserByIndexPath(indexPath: indexPath)
-        cell.nameLabel?.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        cell.nameLabel.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        cell.locationLabel.text = presenter.getLocation(indexPath: indexPath)
         
         if let image = user.image {
             cell.avatarImageView.image = image
