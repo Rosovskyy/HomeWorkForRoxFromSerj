@@ -1,0 +1,61 @@
+[
+  {
+    "userID" : "1",
+    "firstName" : "Willow",
+    "lastName" : "Rosenberg",
+    "city" : "Sunnydale",
+    "country" : "USA",
+    "imageURL" : "5631989824_2e273b642f_o",
+  },
+  {
+    "userID" : "2",
+    "firstName" : "Xander",
+    "lastName" : "Harris",
+    "city" : "Sunnydale",
+    "country" : "USA",
+    "imageURL" : "S6_058_Xander",
+  },
+  {
+    "userID" : "3",
+    "firstName" : "Cordelia",
+    "lastName" : "Chase",
+    "city" : "Sunnydale",
+    "country" : "USA",
+    "imageURL" : "AS2_017_Cordelia",
+  },
+  {
+    "userID" : "4",
+    "firstName" : "Rupert",
+    "lastName" : "Giles",
+    "country" : "England",
+    "imageURL" : "1rupert_giles",
+  },
+  {
+    "userID" : "6",
+    "firstName" : "Angel",
+    "city" : "Galway",
+    "country" : "Ireland",
+    "imageURL" : "Angel-promo-hq-angel-3273676-900-1233-1-",
+  },
+  {
+    "userID" : "5",
+    "firstName" : "Riley",
+    "lastName" : "Finn",
+    "city" : "Huxley",
+    "country" : "USA",
+    "imageURL" : "RileyFinn",
+  },
+  {
+    "userID" : "7",
+    "firstName" : "Spike",
+    "country" : "England",
+    "imageURL" : "Spike_buffy_season_six_3",
+  },
+  {
+    "userID" : "8",
+    "firstName" : "Daniel",
+    "lastName" : "Osbourne",
+    "imageURL" : "Oz_B4-04",
+  },
+  
+]

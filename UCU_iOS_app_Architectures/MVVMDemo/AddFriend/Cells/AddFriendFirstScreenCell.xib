@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddFriendFirstScreenCell" id="gTV-IL-0wX" customClass="AddFriendFirstScreenCell" customModule="UCU_iOS_app_Architectures" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="485"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="319" height="485"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nas-ah-2SN">
+                        <rect key="frame" x="0.0" y="0.0" width="319" height="485"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ny1-XP-sVV">
+                                <rect key="frame" x="50" y="60" width="219" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GIt-UR-R8z">
+                                <rect key="frame" x="50" y="129" width="219" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVg-kG-qru">
+                                <rect key="frame" x="50" y="39" width="59.5" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zut-ru-0Fq">
+                                <rect key="frame" x="50" y="108" width="59" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="GIt-UR-R8z" firstAttribute="top" secondItem="Ny1-XP-sVV" secondAttribute="bottom" constant="35" id="B9x-1j-gfJ"/>
+                            <constraint firstItem="GIt-UR-R8z" firstAttribute="leading" secondItem="nas-ah-2SN" secondAttribute="leading" constant="50" id="Bub-bT-nNf"/>
+                            <constraint firstAttribute="trailing" secondItem="GIt-UR-R8z" secondAttribute="trailing" constant="50" id="EZK-QH-LsN"/>
+                            <constraint firstAttribute="trailing" secondItem="Ny1-XP-sVV" secondAttribute="trailing" constant="50" id="IN0-tp-jyC"/>
+                            <constraint firstItem="Ny1-XP-sVV" firstAttribute="leading" secondItem="nas-ah-2SN" secondAttribute="leading" constant="50" id="Nah-o9-RIn"/>
+                            <constraint firstItem="GIt-UR-R8z" firstAttribute="top" secondItem="zut-ru-0Fq" secondAttribute="bottom" constant="6" id="QIS-tj-6bu"/>
+                            <constraint firstItem="zut-ru-0Fq" firstAttribute="leading" secondItem="GIt-UR-R8z" secondAttribute="leading" id="ag7-Ih-Yav"/>
+                            <constraint firstItem="Ny1-XP-sVV" firstAttribute="top" secondItem="nas-ah-2SN" secondAttribute="top" constant="60" id="liE-aQ-scc"/>
+                            <constraint firstItem="aVg-kG-qru" firstAttribute="leading" secondItem="Ny1-XP-sVV" secondAttribute="leading" id="uCF-gd-3EK"/>
+                            <constraint firstItem="Ny1-XP-sVV" firstAttribute="top" secondItem="aVg-kG-qru" secondAttribute="bottom" constant="6" id="yKS-U9-rNa"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="nas-ah-2SN" secondAttribute="bottom" id="WKH-mv-acW"/>
+                <constraint firstAttribute="trailing" secondItem="nas-ah-2SN" secondAttribute="trailing" id="WNI-l0-emX"/>
+                <constraint firstItem="nas-ah-2SN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="q9e-Bk-f6h"/>
+                <constraint firstItem="nas-ah-2SN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qhi-8F-xLW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="319" height="485"/>
+            <connections>
+                <outlet property="lastNameTextField" destination="GIt-UR-R8z" id="xVX-4n-Jfi"/>
+                <outlet property="nameTextField" destination="Ny1-XP-sVV" id="Sah-tP-MBp"/>
+            </connections>
+            <point key="canvasLocation" x="178.98550724637681" y="216.62946428571428"/>
+        </collectionViewCell>
+    </objects>
+</document>
