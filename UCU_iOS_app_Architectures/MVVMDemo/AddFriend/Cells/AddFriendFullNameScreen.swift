@@ -11,7 +11,7 @@ import UIKit
 //
 // MARK: - UICollectionViewCell
 //
-class AddFriendFirstScreenCell: UICollectionViewCell {
+final class AddFriendFullNameScreen: UICollectionViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet weak var nameTextField: UITextField!

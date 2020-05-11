@@ -12,5 +12,6 @@ import UIKit
 struct MVVMFriendCellViewModel {
     let name: String
     let imageURL: String?
+    let location: String?
     var image: UIImage?
 }

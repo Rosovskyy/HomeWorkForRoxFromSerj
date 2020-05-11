@@ -11,7 +11,7 @@ import UIKit
 //
 // MARK: - Cell
 //
-class FriendCell: UITableViewCell {
+final class FriendCell: UITableViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -25,7 +25,9 @@ class FriendCell: UITableViewCell {
     // MARK: - Initialization
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+    }
+    
+    override func layoutSubviews() {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
         avatarImageView.layer.masksToBounds = true
         
@@ -33,8 +35,6 @@ class FriendCell: UITableViewCell {
         locationLabel.layer.masksToBounds = true
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        // Configure the view for the selected state
-    }
+    override func setSelected(_ selected: Bool, animated: Bool) {}
     
 }

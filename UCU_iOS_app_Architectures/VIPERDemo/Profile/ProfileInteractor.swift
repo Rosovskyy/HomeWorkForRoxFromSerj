@@ -19,15 +19,13 @@ protocol ProfileInteractorProtocol: class {
 //
 // MARK: - Interactor
 //
-class ProfileInteractor: ProfileInteractorProtocol {
+final class ProfileInteractor: ProfileInteractorProtocol {
     
     // MARK: - Properties
     weak var presenter: VIPERProfilePresenterProtocol!
     private let userAPIClient: UserAPIClient = UserAPIClient()
     private let imageAPIClient: ImageAPIClient = ImageAPIClient()
-    
-    private var user: User?
-    
+        
     // MARK: - Initialization
     required init(presenter: VIPERProfilePresenterProtocol) {
         self.presenter = presenter
@@ -35,18 +33,16 @@ class ProfileInteractor: ProfileInteractorProtocol {
     
     func getMyProfile() {
         userAPIClient.getMe { [weak self] user in
-            self?.user = user
             self?.loadImage(user: user)
             self?.presenter.showMyProfile(user: user)
         }
     }
     
     func loadImage(user: User) {
-        self.user = user
         imageAPIClient.loadImage(url: user.avatarURL) { [weak self] image in
             if let image = image {
-                self?.user?.image = image
-                self?.presenter.showMyProfile(user: self?.user ?? User())
+                user.image = image
+                self?.presenter.showMyProfile(user: user)
             }
         }
     }

@@ -11,14 +11,14 @@ import RxSwift
 import RxCocoa
 import MBProgressHUD
 
-class AddFriendThirdScreenCell: UICollectionViewCell {
+final class AddFriendImageScreen: UICollectionViewCell {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var previewImage: UIImageView!
+    @IBOutlet private weak var previewImage: UIImageView!
     
     // MARK: - Properties
     private let photoManager = PhotoManager()
-    var vc: UIViewController?
+    weak var vc: UIViewController?
     
     // MARK: - Rx
     let imageChanged = PublishRelay<UIImage>()
@@ -45,7 +45,7 @@ class AddFriendThirdScreenCell: UICollectionViewCell {
     }
     
     // MARK: - IBActions
-    @IBAction func libraryTapped(_ sender: Any) {
+    @IBAction private func libraryTapped(_ sender: Any) {
         MBProgressHUD.showAdded(to: self, animated: true)
         photoManager.managePhoto(vc: vc!, sourceType: .photoLibrary)
     }

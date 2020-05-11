@@ -11,7 +11,7 @@ import UIKit
 //
 // MARK: - CollectionViewCell
 //
-class AddFriendSecondScreenCell: UICollectionViewCell {
+final class AddFriendLocationScreen: UICollectionViewCell {
 
     // MARK: - IBOutlets
     @IBOutlet weak var cityNameTextField: UITextField!

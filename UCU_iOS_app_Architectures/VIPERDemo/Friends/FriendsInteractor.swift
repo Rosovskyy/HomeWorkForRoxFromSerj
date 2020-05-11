@@ -19,7 +19,7 @@ protocol FriendsInteractorProtocol: class {
 //
 // MARK: - Interactor
 //
-class FriendsInteractor: FriendsInteractorProtocol {
+final class FriendsInteractor: FriendsInteractorProtocol {
     
     // MARK: - Properties
     weak var presenter: VIPERFriendsPresenterProtocol!

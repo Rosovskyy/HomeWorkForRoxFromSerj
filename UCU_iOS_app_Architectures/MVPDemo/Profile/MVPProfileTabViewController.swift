@@ -12,19 +12,20 @@ import UIKit
 // MARK: - Presenter Protocol
 //
 protocol ProfilePresenterProtocol {
-    func viewDidLoad()
+    func viewDidLoad(isFriendScreen: Bool)
     func getUserForEditing() -> User?
+    func setFriendUser(user: User)
 }
 
 //
 // MVP: Controller
 // -----------------
-class MVPProfileViewController: UIViewController, ProfileViewProtocol {
+final class MVPProfileViewController: UIViewController, ProfileViewProtocol {
     
     // MARK: - IBOutlets
     @IBOutlet private weak var headerView: MVPProfileTabHeaderView!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var descriptionLabel: UILabel! {
         didSet {
             descriptionLabel.applyBodyStyle()
@@ -32,9 +33,8 @@ class MVPProfileViewController: UIViewController, ProfileViewProtocol {
     }
     
     // MARK: - Properties
-    var user: User?
-    var myProfileScreen: Bool = true
-    private let profilePresenter = ProfilePresenter()
+    var isFriendScreen: Bool = true
+    private var profilePresenter: ProfilePresenterProtocol!
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -54,6 +54,17 @@ class MVPProfileViewController: UIViewController, ProfileViewProtocol {
         }
     }
     
+    // MARK: - Public
+    func setUser(user: User) {
+        profilePresenter.setFriendUser(user: user)
+    }
+    
+    func createPresenter() {
+        if profilePresenter == nil {
+            profilePresenter = ProfilePresenter(view: self)
+        }
+    }
+    
     // MARK: - Presenter Protocol
     func userLoaded(user: User) {
         headerView.nameLabel.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
@@ -61,26 +72,19 @@ class MVPProfileViewController: UIViewController, ProfileViewProtocol {
         descriptionLabel.text = "\((user.firstName ?? "") + " " + (user.lastName ?? "")) was born in \(user.city ?? ""), \(user.country ?? "")"
     }
     
+    func setFriendProfileScreen(isFriendProfile: Bool) {
+        editButton.isHidden = isFriendProfile
+        cancelButton.isHidden = !isFriendProfile
+    }
+    
     // MARK: - Private
     private func setupUI() {
         
         // Presenter
-        profilePresenter.setViewDelegate(profileViewProtocol: self)
+        createPresenter()
         
         // Data
-        if myProfileScreen {
-            profilePresenter.viewDidLoad()
-        } else {
-            setFriendProfile()
-        }
-    }
-    
-    private func setFriendProfile() {
-        editButton.isHidden = true
-        cancelButton.isHidden = false
-        
-        guard let user = user else { return }
-        userLoaded(user: user)
+        profilePresenter.viewDidLoad(isFriendScreen: isFriendScreen)
     }
     
     // MARK: - IBActions
@@ -94,10 +98,5 @@ class MVPProfileViewController: UIViewController, ProfileViewProtocol {
 //
 extension MVPProfileViewController: MVPEditProfileViewControllerDelegate {
     func editProfileViewControllerDidSave(_ editProfileVC: MVPEditProfileViewController) {
-        self.user = editProfileVC.user
-        
-        headerView.nameLabel.text = (user?.firstName ?? "") + " " + (user?.lastName ?? "")
-
-        descriptionLabel.text = "\((user?.firstName ?? "") + " " + (user?.lastName ?? "")) was born in \(user?.city ?? ""), \(user?.country ?? "")"
     }
 }

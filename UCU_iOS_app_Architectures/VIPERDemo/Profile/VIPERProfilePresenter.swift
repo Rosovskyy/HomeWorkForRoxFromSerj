@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 //
 // MARK: - Presenter Protocol
 //
 protocol VIPERProfilePresenterProtocol: class {
-    var router: ProfileRouterProtocol! { set get }
     func configureView(user: User?)
     func editButtonTapped()
     func showMyProfile(user: User)
@@ -24,14 +24,14 @@ protocol VIPERProfilePresenterProtocol: class {
 // MARK: - View Protocol
 //
 protocol VIPERProfileViewProtocol: class {
-    func setUserData(user: User)
+    func setUserData(fullName: String, location: String, image: UIImage)
     func setFriendView()
 }
 
 //
 // MARK: - Presenter
 //
-class VIPERProfilePresenter: VIPERProfilePresenterProtocol {
+final class VIPERProfilePresenter: VIPERProfilePresenterProtocol {
     
     // MARK: - Properties
     weak var view: VIPERProfileViewProtocol!
@@ -62,7 +62,15 @@ class VIPERProfilePresenter: VIPERProfilePresenterProtocol {
     
     func showMyProfile(user: User) {
         self.user = user
-        self.view.setUserData(user: user)
+        let fullName = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        let joinedString = JoinedString()
+        let location = joinedString.append(user.city).append(user.country).result
+        if let image = user.image {
+            self.view.setUserData(fullName: fullName, location: location, image: image)
+        } else {
+            self.view.setUserData(fullName: fullName, location: location, image: UIImage())
+            self.loadImage(user: user)
+        }
     }
     
     func cancelTapped() {

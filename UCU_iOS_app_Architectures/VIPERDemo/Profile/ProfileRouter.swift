@@ -20,13 +20,13 @@ protocol ProfileRouterProtocol: class {
 //
 // MARK: - Router
 //
-class ProfileRouter: ProfileRouterProtocol {
+final class ProfileRouter: ProfileRouterProtocol {
     
     // MARK: - Properties
-    weak var viewController: ProfileVC!
+    weak var viewController: UIViewController!
     
     // MARK: - Initialization
-    init(viewController: ProfileVC) {
+    init(viewController: UIViewController) {
         self.viewController = viewController
     }
     
@@ -35,7 +35,7 @@ class ProfileRouter: ProfileRouterProtocol {
         let storyboard = UIStoryboard(name: "ViperStoryboard", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "EditVC") as? EditVC {
             vc.user = user
-            vc.delegate = viewController
+            vc.delegate = viewController as? VIPEREditProfileViewControllerDelegate
             viewController.present(vc, animated: true)
         }
     }

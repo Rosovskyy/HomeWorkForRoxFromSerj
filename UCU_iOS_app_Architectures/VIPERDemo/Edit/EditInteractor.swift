@@ -18,7 +18,7 @@ protocol EditInteractorProtocol: class {
 //
 // MARK: - Interactor
 //
-class EditInteractor: EditInteractorProtocol {
+final class EditInteractor: EditInteractorProtocol {
     
     // MARK: - Properties
     weak var presenter: VIPEREditPresenterProtocol!

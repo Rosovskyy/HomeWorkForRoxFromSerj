@@ -13,6 +13,7 @@ import Foundation
 //
 protocol ProfileViewProtocol: class {
     func userLoaded(user: User)
+    func setFriendProfileScreen(isFriendProfile: Bool)
 }
 
 //
@@ -28,23 +29,30 @@ final class ProfilePresenter: ProfilePresenterProtocol {
     private var user: User?
     
     // MARK: - Initialization
-    init(userAPIClient: UserAPIClient = UserAPIClient(), imageAPIClient: ImageAPIClient = ImageAPIClient()){
+    init(view: ProfileViewProtocol?, userAPIClient: UserAPIClient = UserAPIClient(), imageAPIClient: ImageAPIClient = ImageAPIClient()){
+        self.view = view
         self.userAPIClient = userAPIClient
         self.imageAPIClient = imageAPIClient
     }
     
-    func setViewDelegate(profileViewProtocol: ProfileViewProtocol?){
-        self.view = profileViewProtocol
-    }
-    
     // MARK: - Protocol
-    func viewDidLoad() {
-        getUser()
+    func viewDidLoad(isFriendScreen: Bool) {
+        if isFriendScreen, let user = user {
+            view?.userLoaded(user: user)
+            loadImage()
+        } else {
+            getUser()
+        }
+        view?.setFriendProfileScreen(isFriendProfile: isFriendScreen)
     }
     
     func getUserForEditing() -> User? {
         guard let user = user else { return nil }
         return user
+    }
+    
+    func setFriendUser(user: User) {
+        self.user = user
     }
     
     // MARK: - Private

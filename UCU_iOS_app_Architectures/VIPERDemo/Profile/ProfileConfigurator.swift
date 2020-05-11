@@ -18,7 +18,7 @@ protocol ProfileConfiguratorProtocol: class {
 //
 // MARK: - Configurator
 //
-class ProfileConfigurator: ProfileConfiguratorProtocol {
+final class ProfileConfigurator: ProfileConfiguratorProtocol {
     func configure(with viewController: ProfileVC) {
         let presenter = VIPERProfilePresenter(view: viewController)
         let interactor = ProfileInteractor(presenter: presenter)

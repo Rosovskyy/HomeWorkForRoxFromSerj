@@ -19,13 +19,13 @@ protocol EditRouterProtocol: class {
 //
 // MARK: - Router
 //
-class EditRouter: EditRouterProtocol {
+final class EditRouter: EditRouterProtocol {
     
     // MARK: - Properties
-    weak var viewController: EditVC!
+    weak var viewController: UIViewController!
     
     // MARK: - Initialization
-    init(viewController: EditVC) {
+    init(viewController: UIViewController) {
         self.viewController = viewController
     }
     

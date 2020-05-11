@@ -35,7 +35,7 @@ protocol VIPERFriendsViewProtocol: class {
 //
 // MARK: - Presenter
 //
-class VIPERFriendsPresenter: VIPERFriendsPresenterProtocol {
+final class VIPERFriendsPresenter: VIPERFriendsPresenterProtocol {
     
     // MARK: - Properties
     weak var view: VIPERFriendsViewProtocol!

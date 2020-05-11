@@ -56,6 +56,8 @@
 		C906BDD424616AD70052636A /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C906BDD324616AD70052636A /* ProfileVM.swift */; };
 		C906C8232461BE3000D80BA6 /* FriendsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C906C8222461BE3000D80BA6 /* FriendsPresenter.swift */; };
 		C9082D702461AD7700B56355 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9082D6F2461AD7700B56355 /* ProfilePresenter.swift */; };
+		C9106D082466FF9200854371 /* UITextField+Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9106D072466FF9200854371 /* UITextField+Id.swift */; };
+		C9106D0C246701A600854371 /* JoinedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9106D0B246701A600854371 /* JoinedString.swift */; };
 		C987E3952462F3CA00A057E7 /* VIPERProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C987E3942462F3CA00A057E7 /* VIPERProfilePresenter.swift */; };
 		C987E3972462F3FC00A057E7 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C987E3962462F3FB00A057E7 /* ProfileRouter.swift */; };
 		C987E3992462F44700A057E7 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C987E3982462F44700A057E7 /* ProfileInteractor.swift */; };
@@ -76,12 +78,12 @@
 		C9F735FA2462BDA50082C2C4 /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F735F92462BDA50082C2C4 /* AddFriendVC.swift */; };
 		C9F735FC2462BDAC0082C2C4 /* AddFriendVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F735FB2462BDAC0082C2C4 /* AddFriendVM.swift */; };
 		C9F736002462C4900082C2C4 /* Cell+Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F735FF2462C4900082C2C4 /* Cell+Id.swift */; };
-		C9F736032462C51E0082C2C4 /* AddFriendFirstScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F736012462C51E0082C2C4 /* AddFriendFirstScreenCell.swift */; };
-		C9F736042462C51E0082C2C4 /* AddFriendFirstScreenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F736022462C51E0082C2C4 /* AddFriendFirstScreenCell.xib */; };
-		C9F736072462C8950082C2C4 /* AddFriendSecondScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F736052462C8950082C2C4 /* AddFriendSecondScreenCell.swift */; };
-		C9F736082462C8950082C2C4 /* AddFriendSecondScreenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F736062462C8950082C2C4 /* AddFriendSecondScreenCell.xib */; };
-		C9F7360B2462C8A10082C2C4 /* AddFriendThirdScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F736092462C8A10082C2C4 /* AddFriendThirdScreenCell.swift */; };
-		C9F7360C2462C8A10082C2C4 /* AddFriendThirdScreenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F7360A2462C8A10082C2C4 /* AddFriendThirdScreenCell.xib */; };
+		C9F736032462C51E0082C2C4 /* AddFriendFullNameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F736012462C51E0082C2C4 /* AddFriendFullNameScreen.swift */; };
+		C9F736042462C51E0082C2C4 /* AddFriendFullNameScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F736022462C51E0082C2C4 /* AddFriendFullNameScreen.xib */; };
+		C9F736072462C8950082C2C4 /* AddFriendLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F736052462C8950082C2C4 /* AddFriendLocationScreen.swift */; };
+		C9F736082462C8950082C2C4 /* AddFriendLocationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F736062462C8950082C2C4 /* AddFriendLocationScreen.xib */; };
+		C9F7360B2462C8A10082C2C4 /* AddFriendImageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F736092462C8A10082C2C4 /* AddFriendImageScreen.swift */; };
+		C9F7360C2462C8A10082C2C4 /* AddFriendImageScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F7360A2462C8A10082C2C4 /* AddFriendImageScreen.xib */; };
 		C9F7360F2462D9BF0082C2C4 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7360E2462D9BF0082C2C4 /* PhotoManager.swift */; };
 		C9F736112462DF410082C2C4 /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F736102462DF410082C2C4 /* UIImage+Orientation.swift */; };
 		C9F736142462EF620082C2C4 /* ViperStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9F736132462EF620082C2C4 /* ViperStoryboard.storyboard */; };
@@ -144,6 +146,8 @@
 		C906BDD324616AD70052636A /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
 		C906C8222461BE3000D80BA6 /* FriendsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPresenter.swift; sourceTree = "<group>"; };
 		C9082D6F2461AD7700B56355 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		C9106D072466FF9200854371 /* UITextField+Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Id.swift"; sourceTree = "<group>"; };
+		C9106D0B246701A600854371 /* JoinedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedString.swift; sourceTree = "<group>"; };
 		C987E3942462F3CA00A057E7 /* VIPERProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPERProfilePresenter.swift; sourceTree = "<group>"; };
 		C987E3962462F3FB00A057E7 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		C987E3982462F44700A057E7 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
@@ -164,12 +168,12 @@
 		C9F735F92462BDA50082C2C4 /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		C9F735FB2462BDAC0082C2C4 /* AddFriendVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVM.swift; sourceTree = "<group>"; };
 		C9F735FF2462C4900082C2C4 /* Cell+Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+Id.swift"; sourceTree = "<group>"; };
-		C9F736012462C51E0082C2C4 /* AddFriendFirstScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendFirstScreenCell.swift; sourceTree = "<group>"; };
-		C9F736022462C51E0082C2C4 /* AddFriendFirstScreenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendFirstScreenCell.xib; sourceTree = "<group>"; };
-		C9F736052462C8950082C2C4 /* AddFriendSecondScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendSecondScreenCell.swift; sourceTree = "<group>"; };
-		C9F736062462C8950082C2C4 /* AddFriendSecondScreenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendSecondScreenCell.xib; sourceTree = "<group>"; };
-		C9F736092462C8A10082C2C4 /* AddFriendThirdScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendThirdScreenCell.swift; sourceTree = "<group>"; };
-		C9F7360A2462C8A10082C2C4 /* AddFriendThirdScreenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendThirdScreenCell.xib; sourceTree = "<group>"; };
+		C9F736012462C51E0082C2C4 /* AddFriendFullNameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendFullNameScreen.swift; sourceTree = "<group>"; };
+		C9F736022462C51E0082C2C4 /* AddFriendFullNameScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendFullNameScreen.xib; sourceTree = "<group>"; };
+		C9F736052462C8950082C2C4 /* AddFriendLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendLocationScreen.swift; sourceTree = "<group>"; };
+		C9F736062462C8950082C2C4 /* AddFriendLocationScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendLocationScreen.xib; sourceTree = "<group>"; };
+		C9F736092462C8A10082C2C4 /* AddFriendImageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendImageScreen.swift; sourceTree = "<group>"; };
+		C9F7360A2462C8A10082C2C4 /* AddFriendImageScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendImageScreen.xib; sourceTree = "<group>"; };
 		C9F7360E2462D9BF0082C2C4 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		C9F736102462DF410082C2C4 /* UIImage+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
 		C9F736132462EF620082C2C4 /* ViperStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ViperStoryboard.storyboard; sourceTree = "<group>"; };
@@ -255,11 +259,9 @@
 		76C3413D244F92FE00424413 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C9106D0A2467019F00854371 /* Helpers */,
+				C9106D092467019300854371 /* Extensions */,
 				76C341CC2458D28E00424413 /* Style */,
-				76C3413E244F931900424413 /* UITableView+Bundle.swift */,
-				76C3415D2456411B00424413 /* Dispatch+Delay.swift */,
-				C9F735FF2462C4900082C2C4 /* Cell+Id.swift */,
-				C9F736102462DF410082C2C4 /* UIImage+Orientation.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -454,6 +456,26 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		C9106D092467019300854371 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				76C3413E244F931900424413 /* UITableView+Bundle.swift */,
+				76C3415D2456411B00424413 /* Dispatch+Delay.swift */,
+				C9F735FF2462C4900082C2C4 /* Cell+Id.swift */,
+				C9F736102462DF410082C2C4 /* UIImage+Orientation.swift */,
+				C9106D072466FF9200854371 /* UITextField+Id.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C9106D0A2467019F00854371 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C9106D0B246701A600854371 /* JoinedString.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		C9EF731D246184B900C0EA70 /* VM */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,12 +540,12 @@
 		C9F735FE2462C4720082C2C4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				C9F736012462C51E0082C2C4 /* AddFriendFirstScreenCell.swift */,
-				C9F736022462C51E0082C2C4 /* AddFriendFirstScreenCell.xib */,
-				C9F736052462C8950082C2C4 /* AddFriendSecondScreenCell.swift */,
-				C9F736062462C8950082C2C4 /* AddFriendSecondScreenCell.xib */,
-				C9F736092462C8A10082C2C4 /* AddFriendThirdScreenCell.swift */,
-				C9F7360A2462C8A10082C2C4 /* AddFriendThirdScreenCell.xib */,
+				C9F736012462C51E0082C2C4 /* AddFriendFullNameScreen.swift */,
+				C9F736022462C51E0082C2C4 /* AddFriendFullNameScreen.xib */,
+				C9F736052462C8950082C2C4 /* AddFriendLocationScreen.swift */,
+				C9F736062462C8950082C2C4 /* AddFriendLocationScreen.xib */,
+				C9F736092462C8A10082C2C4 /* AddFriendImageScreen.swift */,
+				C9F7360A2462C8A10082C2C4 /* AddFriendImageScreen.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -664,7 +686,7 @@
 				76C341C12457748C00424413 /* MVVMDemo.storyboard in Resources */,
 				76C341C32457749800424413 /* MVPDemo.storyboard in Resources */,
 				76C341602456451000424413 /* Users.json in Resources */,
-				C9F7360C2462C8A10082C2C4 /* AddFriendThirdScreenCell.xib in Resources */,
+				C9F7360C2462C8A10082C2C4 /* AddFriendImageScreen.xib in Resources */,
 				76C34173245758DB00424413 /* Angel-promo-hq-angel-3273676-900-1233-1-.jpg in Resources */,
 				76C3414A245632CF00424413 /* MVCDemo.storyboard in Resources */,
 				76C3416A245758D100424413 /* Spike_buffy_season_six_3.jpg in Resources */,
@@ -673,14 +695,14 @@
 				76C34171245758DB00424413 /* C1.jpg in Resources */,
 				C9ABA59824640C0300335405 /* FriendCell.xib in Resources */,
 				76C34170245758DB00424413 /* 1rupert_giles.jpg in Resources */,
-				C9F736082462C8950082C2C4 /* AddFriendSecondScreenCell.xib in Resources */,
+				C9F736082462C8950082C2C4 /* AddFriendLocationScreen.xib in Resources */,
 				76C34172245758DB00424413 /* AS2_017_Cordelia.jpg in Resources */,
 				76C34168245758D100424413 /* Oz_B4-04.jpg in Resources */,
 				76C34167245758D100424413 /* RileyFinn.jpg in Resources */,
 				76C34131244F8EB700424413 /* Assets.xcassets in Resources */,
 				76C34174245758DB00424413 /* 5631989824_2e273b642f_o.jpg in Resources */,
 				76C34169245758D100424413 /* S6_058_Xander.jpg in Resources */,
-				C9F736042462C51E0082C2C4 /* AddFriendFirstScreenCell.xib in Resources */,
+				C9F736042462C51E0082C2C4 /* AddFriendFullNameScreen.xib in Resources */,
 				76C3412F244F8EB400424413 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -739,6 +761,7 @@
 				C987E3A7246314E800A057E7 /* FriendsConfigurator.swift in Sources */,
 				C9F736002462C4900082C2C4 /* Cell+Id.swift in Sources */,
 				76C341A52457744B00424413 /* MVVMEditProfileVC.swift in Sources */,
+				C9106D0C246701A600854371 /* JoinedString.swift in Sources */,
 				76C341A32457744B00424413 /* MVVMProfileTabHeaderView.swift in Sources */,
 				76C341762457648800424413 /* MVCEditProfileViewController.swift in Sources */,
 				C987E3AD2463150100A057E7 /* FriendsInteractor.swift in Sources */,
@@ -754,7 +777,7 @@
 				76C341CE2458D44700424413 /* UILabel+Style.swift in Sources */,
 				C9082D702461AD7700B56355 /* ProfilePresenter.swift in Sources */,
 				C9ABA59724640C0300335405 /* FriendCell.swift in Sources */,
-				C9F736032462C51E0082C2C4 /* AddFriendFirstScreenCell.swift in Sources */,
+				C9F736032462C51E0082C2C4 /* AddFriendFullNameScreen.swift in Sources */,
 				76C341C92458D10400424413 /* UIColor+UCU_App.swift in Sources */,
 				76C34143244F95A000424413 /* IntroMenuOptionsDataSource.swift in Sources */,
 				C987E39B2462F7BD00A057E7 /* EditVC.swift in Sources */,
@@ -768,6 +791,7 @@
 				76C3414E2456352A00424413 /* IntroMenuOptionsControllerFactory.swift in Sources */,
 				76C3415E2456411B00424413 /* Dispatch+Delay.swift in Sources */,
 				C9F7361E2462F2C90082C2C4 /* ProfileVC.swift in Sources */,
+				C9106D082466FF9200854371 /* UITextField+Id.swift in Sources */,
 				C987E3992462F44700A057E7 /* ProfileInteractor.swift in Sources */,
 				76C34128244F8EB400424413 /* AppDelegate.swift in Sources */,
 				76C341A62457744B00424413 /* MVVMProfileTabVC.swift in Sources */,
@@ -777,7 +801,7 @@
 				C987E3A324630D0800A057E7 /* EditInteractor.swift in Sources */,
 				C987E39D24630CE300A057E7 /* EditConfigurator.swift in Sources */,
 				76C341B72457746500424413 /* MVPFriendsTabViewController.swift in Sources */,
-				C9F7360B2462C8A10082C2C4 /* AddFriendThirdScreenCell.swift in Sources */,
+				C9F7360B2462C8A10082C2C4 /* AddFriendImageScreen.swift in Sources */,
 				76C3415224563AA800424413 /* MVCFriendsTabViewController.swift in Sources */,
 				C9F7360F2462D9BF0082C2C4 /* PhotoManager.swift in Sources */,
 				C9F736192462F04F0082C2C4 /* ProfileConfigurator.swift in Sources */,
@@ -785,7 +809,7 @@
 				C987E3A5246314E100A057E7 /* FriendsVC.swift in Sources */,
 				76C341C52457796900424413 /* ExitTabViewController.swift in Sources */,
 				C987E3AB246314FA00A057E7 /* FriendsRouter.swift in Sources */,
-				C9F736072462C8950082C2C4 /* AddFriendSecondScreenCell.swift in Sources */,
+				C9F736072462C8950082C2C4 /* AddFriendLocationScreen.swift in Sources */,
 				C906BDCE24616A460052636A /* MVVMFriendsVM.swift in Sources */,
 				C906C8232461BE3000D80BA6 /* FriendsPresenter.swift in Sources */,
 				C9F735FA2462BDA50082C2C4 /* AddFriendVC.swift in Sources */,

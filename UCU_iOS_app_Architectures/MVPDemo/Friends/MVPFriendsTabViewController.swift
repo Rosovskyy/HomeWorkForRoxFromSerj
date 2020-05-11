@@ -16,6 +16,8 @@ protocol FriendsPresenterProtocol {
     func viewDidLoad()
     
     func getLocation(indexPath: IndexPath) -> String
+    func getFullName(indexPath: IndexPath) -> String
+    func getUserImage(indexPath: IndexPath) -> UIImage?
     
     // DataSource
     var friendsCount: Int { get }
@@ -30,20 +32,13 @@ final class MVPFriendsViewController: UIViewController, FriendsViewProtocol {
     @IBOutlet private weak var tableView: UITableView!
 
     // MARK: - Properties
-    private let friendsPresenter = FriendsPresenter()
-    private var friends = [User]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var friendsPresenter: FriendsPresenterProtocol!
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-        friendsPresenter.setViewDelegate(friendsViewProtocol: self)
-        friendsPresenter.viewDidLoad()
     }
     
     // MARK: - Segue
@@ -51,8 +46,9 @@ final class MVPFriendsViewController: UIViewController, FriendsViewProtocol {
         if let indexPath = tableView.indexPathForSelectedRow {
             let friendProfileVC = segue.destination as! MVPProfileViewController
                     
-            friendProfileVC.myProfileScreen = false
-            friendProfileVC.user = friendsPresenter.getUserByIndexPath(indexPath: indexPath)
+            friendProfileVC.createPresenter()
+            friendProfileVC.isFriendScreen = true
+            friendProfileVC.setUser(user: friendsPresenter.getUserByIndexPath(indexPath: indexPath))
                     
             friendProfileVC.modalPresentationStyle = .fullScreen
         }
@@ -69,6 +65,9 @@ final class MVPFriendsViewController: UIViewController, FriendsViewProtocol {
     
     // MARK: - Private
     private func setupUI() {
+        
+        friendsPresenter = FriendsPresenter(view: self)
+        friendsPresenter.viewDidLoad()
         
         // TableView
         tableView.dataSource = self
@@ -91,16 +90,9 @@ extension MVPFriendsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.id, for: indexPath) as! FriendCell
         
-        let user = friendsPresenter.getUserByIndexPath(indexPath: indexPath)
-        cell.nameLabel.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        cell.nameLabel.text = friendsPresenter.getFullName(indexPath: indexPath)
         cell.locationLabel.text = friendsPresenter.getLocation(indexPath: indexPath)
-        
-        if let image = user.image {
-            cell.avatarImageView.image = image
-        } else {
-            friendsPresenter.loadImage(indexPath: indexPath)
-        }
-        
+        cell.avatarImageView.image = friendsPresenter.getUserImage(indexPath: indexPath)
         
         return cell
     }

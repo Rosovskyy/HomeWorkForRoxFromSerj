@@ -14,18 +14,18 @@ import UIKit
 final class AddFriendViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var leftButton: UIButton!
-    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet private weak var progressView: UIProgressView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var leftButton: UIButton!
+    @IBOutlet private weak var rightButton: UIButton!
     
     // MARK: - Properties
-    lazy var viewModel: AddFriendVM = {
+    private lazy var viewModel: AddFriendVM = {
         return AddFriendVM()
     }()
     
-    var didUserCreated: (( _ user: User) -> Void)?
+    var didCreateUser: (( _ user: User) -> Void)?
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ final class AddFriendViewController: UIViewController {
     // MARK: - Private
     private func prepareBind() {
         viewModel.userCreated.bind { [weak self] user in
-            self?.didUserCreated?(user)
+            self?.didCreateUser?(user)
             self?.dismiss(animated: true, completion: nil)
         }.disposed(by: rx.disposeBag)
     }
@@ -78,9 +78,9 @@ final class AddFriendViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.register(UINib(nibName: AddFriendFirstScreenCell.id, bundle: nil), forCellWithReuseIdentifier: AddFriendFirstScreenCell.id)
-        collectionView.register(UINib(nibName: AddFriendSecondScreenCell.id, bundle: nil), forCellWithReuseIdentifier: AddFriendSecondScreenCell.id)
-        collectionView.register(UINib(nibName: AddFriendThirdScreenCell.id, bundle: nil), forCellWithReuseIdentifier: AddFriendThirdScreenCell.id)
+        collectionView.register(UINib(nibName: AddFriendFullNameScreen.id, bundle: nil), forCellWithReuseIdentifier: AddFriendFullNameScreen.id)
+        collectionView.register(UINib(nibName: AddFriendLocationScreen.id, bundle: nil), forCellWithReuseIdentifier: AddFriendLocationScreen.id)
+        collectionView.register(UINib(nibName: AddFriendImageScreen.id, bundle: nil), forCellWithReuseIdentifier: AddFriendImageScreen.id)
     }
     
     private func prepareCollectionViewLayout() {
@@ -127,7 +127,6 @@ final class AddFriendViewController: UIViewController {
             collectionView.selectItem(at: IndexPath(row: viewModel.currentStepIndex, section: 0), animated: true, scrollPosition: .left)
             break
         case 2:
-//            showProgressBarView()
             viewModel.saveFriend()
             break
         default:
@@ -142,26 +141,26 @@ final class AddFriendViewController: UIViewController {
 //
 extension AddFriendViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return viewModel.cellsCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
-            let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddFriendFirstScreenCell.id, for: indexPath) as! AddFriendFirstScreenCell
+            let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddFriendFullNameScreen.id, for: indexPath) as! AddFriendFullNameScreen
             
             firstCell.nameTextField.rx.text.orEmpty.map { $0 }.bind(to: viewModel.firstName).disposed(by: rx.disposeBag)
             firstCell.lastNameTextField.rx.text.orEmpty.map { $0 }.bind(to: viewModel.lastName).disposed(by: rx.disposeBag)
                         
             return firstCell
         } else if indexPath.row == 1 {
-            let secondCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddFriendSecondScreenCell.id, for: indexPath) as! AddFriendSecondScreenCell
+            let secondCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddFriendLocationScreen.id, for: indexPath) as! AddFriendLocationScreen
             
             secondCell.cityNameTextField.rx.text.orEmpty.map { $0 }.bind(to: viewModel.cityName).disposed(by: rx.disposeBag)
             secondCell.countryNameTextField.rx.text.orEmpty.map { $0 }.bind(to: viewModel.countryName).disposed(by: rx.disposeBag)
                         
             return secondCell
         } else {
-            let thirdCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddFriendThirdScreenCell.id, for: indexPath) as! AddFriendThirdScreenCell
+            let thirdCell = collectionView.dequeueReusableCell(withReuseIdentifier: AddFriendImageScreen.id, for: indexPath) as! AddFriendImageScreen
             
             thirdCell.vc = self
             thirdCell.imageChanged.bind { [weak self] image in

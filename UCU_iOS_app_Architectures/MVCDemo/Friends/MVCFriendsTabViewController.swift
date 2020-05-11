@@ -39,8 +39,8 @@ final class MVCFriendsViewController: UIViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             let friendProfileVC = segue.destination as! MVCProfileViewController
                     
-            friendProfileVC.myProfileScreen = false
-            friendProfileVC.user = friends[indexPath.row]
+            friendProfileVC.isFriendProfile = false
+            friendProfileVC.setFriend(user: friends[indexPath.row])
                     
             friendProfileVC.modalPresentationStyle = .fullScreen
         }
@@ -80,16 +80,9 @@ extension MVCFriendsViewController: UITableViewDataSource {
         let user = friends[indexPath.row]
         cell.nameLabel.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
         
-        // SORRY :-((((
-        var text = ""
-        if let city = user.city, let country = user.country {
-            text = "  " + city + ", " + country + "  "
-        } else if let city = user.city {
-            text = "  " + city + "  "
-        } else if let country = user.country {
-            text = "  " + country + "  "
-        }
-        cell.locationLabel.text = text // Sorry for this dummy code :-(
+        let joinedString = JoinedString()
+        let text = joinedString.append(user.city).append(user.country).result
+        cell.locationLabel.text = text
         
         if let image = user.image {
             cell.avatarImageView.image = image

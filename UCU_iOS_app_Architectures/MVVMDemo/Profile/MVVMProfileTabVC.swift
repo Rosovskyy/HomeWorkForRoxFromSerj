@@ -11,16 +11,16 @@ import NSObject_Rx
 
 // MVVM: Controller
 // -----------------
-class MVVMProfileViewController: UIViewController {
+final class MVVMProfileViewController: UIViewController {
         
     // MARK: - IBOutlets
-    @IBOutlet weak var headerView: MVVMProfileTabHeaderView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet private weak var headerView: MVVMProfileTabHeaderView!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var editButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton!
     
     // MARK: - Properties
-    lazy var viewModel: ProfileVM = {
+    private lazy var viewModel: ProfileVM = {
         return ProfileVM()
     }()
     
@@ -63,13 +63,9 @@ class MVVMProfileViewController: UIViewController {
     
     private func prepareBind() {
         viewModel.user.bind { [weak self] user in
-            self?.headerView.nameLabel.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
-            self?.descriptionLabel.text = "\((user.firstName ?? "") + " " + (user.lastName ?? "")) was born in \(user.city ?? ""), \(user.country ?? "")"
-            if let image = user.image {
-                self?.headerView.avatarImageView.image = image
-            } else {
-                self?.viewModel.loadImage()
-            }
+            self?.headerView.nameLabel.text = self?.viewModel.getUserFullName()
+            self?.descriptionLabel.text = self?.viewModel.getUserLocation()
+            self?.headerView.avatarImageView.image = self?.viewModel.getUserImage()
         }.disposed(by: rx.disposeBag)
         
         viewModel.profileImage.bind { [weak self] image in

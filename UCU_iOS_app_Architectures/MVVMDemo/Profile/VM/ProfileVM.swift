@@ -41,5 +41,23 @@ final class ProfileVM {
             }
         }
     }
+    
+    func getUserFullName() -> String {
+        return (user.value.firstName ?? "") + " " + (user.value.lastName ?? "")
+    }
+    
+    func getUserLocation() -> String {
+        let joinedString = JoinedString()
+        return joinedString.append(user.value.city).append(user.value.country).result
+    }
+    
+    func getUserImage() -> UIImage? {
+        if let image = user.value.image {
+            return image
+        } else {
+            loadImage()
+            return nil
+        }
+    }
 }
 

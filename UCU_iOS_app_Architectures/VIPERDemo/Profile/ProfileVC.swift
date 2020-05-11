@@ -11,13 +11,13 @@ import UIKit
 //
 // MARK: - View Controller
 //
-class ProfileVC: UIViewController, VIPERProfileViewProtocol {
+final class ProfileVC: UIViewController, VIPERProfileViewProtocol {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var headerView: VIPERProfileHeaderView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet private weak var headerView: VIPERProfileHeaderView!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var editButton: UIButton!
     
     // MARK: - Properties
     var presenter: VIPERProfilePresenterProtocol!
@@ -34,14 +34,10 @@ class ProfileVC: UIViewController, VIPERProfileViewProtocol {
     }
     
     // MARK: - Protocol
-    func setUserData(user: User) {
-        headerView.nameLabel.text = (user.firstName ?? "") + " " + (user.lastName ?? "")
-        descriptionLabel.text = "\((user.firstName ?? "") + " " + (user.lastName ?? "")) was born in \(user.city ?? ""), \(user.country ?? "")"
-        if let image = user.image {
-            headerView.avatarImageView.image = image
-        } else {
-            presenter.loadImage(user: user)
-        }
+    func setUserData(fullName: String, location: String, image: UIImage) {
+        headerView.nameLabel.text = fullName
+        descriptionLabel.text = location
+        headerView.avatarImageView.image = image
     }
     
     func setFriendView() {
@@ -50,11 +46,11 @@ class ProfileVC: UIViewController, VIPERProfileViewProtocol {
     }
 
     // MARK: - IBActions
-    @IBAction func editTapped(_ sender: Any) {
+    @IBAction private func editTapped(_ sender: Any) {
         presenter.editButtonTapped()
     }
     
-    @IBAction func cancelTapped(_ sender: Any) {
+    @IBAction private func cancelTapped(_ sender: Any) {
         presenter.cancelTapped()
     }
 }

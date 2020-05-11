@@ -18,7 +18,7 @@ protocol FriendsConfiguratorProtocol: class {
 //
 // MARK: - Configurator
 //
-class FriendsConfigurator: FriendsConfiguratorProtocol {
+final class FriendsConfigurator: FriendsConfiguratorProtocol {
     func configure(with viewController: FriendsVC) {
         let presenter = VIPERFriendsPresenter(view: viewController)
         let interactor = FriendsInteractor(presenter: presenter)

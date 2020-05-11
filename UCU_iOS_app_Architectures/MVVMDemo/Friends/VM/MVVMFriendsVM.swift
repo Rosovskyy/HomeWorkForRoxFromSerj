@@ -46,8 +46,12 @@ final class MVVMFriendsViewModel {
     }
     
     func createCellViewModel(user: User) -> MVVMFriendCellViewModel {
-        return MVVMFriendCellViewModel(name: (user.firstName ?? "") + " " + (user.lastName ?? ""),
+        let fullName = (user.firstName ?? "") + " " + (user.lastName ?? "")
+        let joinedString = JoinedString()
+        let location = joinedString.append(user.city).append(user.country).result
+        return MVVMFriendCellViewModel(name: fullName,
                                        imageURL: user.avatarURL,
+                                       location: location,
                                        image: user.image)
     }
     
@@ -59,6 +63,15 @@ final class MVVMFriendsViewModel {
         }
     }
     
+    func getUserImage(indexPath: IndexPath) -> UIImage? {
+        if let image = users[indexPath.row].image {
+            return image
+        } else {
+            loadImage(indexPath: indexPath)
+            return nil
+        }
+    }
+    
     func getUserByIndexPath(indexPath: IndexPath) -> User {
         return users[indexPath.row]
     }
@@ -67,19 +80,6 @@ final class MVVMFriendsViewModel {
         users.insert(user, at: 0)
         cellViewModels.insert(createCellViewModel(user: user), at: 0)
         reloadTableView.accept(())
-    }
-    
-    func getLocation(indexPath: IndexPath) -> String {
-        let user = users[indexPath.row]
-        var text = ""
-        if let city = user.city, let country = user.country {
-            text = "  " + city + ", " + country + "  "
-        } else if let city = user.city {
-            text = "  " + city + "  "
-        } else if let country = user.country {
-            text = "  " + country + "  "
-        }
-        return text
     }
     
     // MARK: - Private

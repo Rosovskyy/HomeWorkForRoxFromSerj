@@ -18,13 +18,13 @@ protocol VIPEREditProfileViewControllerDelegate: class {
 //
 // MARK: - UIViewController
 //
-class EditVC: UIViewController, VIPEREditViewProtocol {
+final class EditVC: UIViewController, VIPEREditViewProtocol {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var cityNameTextField: UITextField!
-    @IBOutlet weak var countryNameTextField: UITextField!
+    @IBOutlet private weak var firstNameTextField: UITextField!
+    @IBOutlet private weak var lastNameTextField: UITextField!
+    @IBOutlet private weak var cityNameTextField: UITextField!
+    @IBOutlet private weak var countryNameTextField: UITextField!
     
     // MARK: - Properties
     weak var delegate: VIPEREditProfileViewControllerDelegate?

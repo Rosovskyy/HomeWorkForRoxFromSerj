@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 //
 // MARK: - Presenter Protocol
@@ -29,13 +30,10 @@ final class FriendsPresenter: FriendsPresenterProtocol {
     private var friends: [User] = [User]()
     
     // MARK: - Initialization
-    init(userAPIClient: UserAPIClient = UserAPIClient(), imageAPIClient: ImageAPIClient = ImageAPIClient()){
+    init(view: FriendsViewProtocol?, userAPIClient: UserAPIClient = UserAPIClient(), imageAPIClient: ImageAPIClient = ImageAPIClient()){
+        self.view = view
         self.userAPIClient = userAPIClient
         self.imageAPIClient = imageAPIClient
-    }
-    
-    func setViewDelegate(friendsViewProtocol: FriendsViewProtocol?) {
-        self.view = friendsViewProtocol
     }
     
     // MARK: - Protocol
@@ -63,6 +61,21 @@ final class FriendsPresenter: FriendsPresenterProtocol {
             text = "  " + country + "  "
         }
         return text
+    }
+    
+    func getFullName(indexPath: IndexPath) -> String {
+        let friend = getUserByIndexPath(indexPath: indexPath)
+        return (friend.firstName ?? "") + " " + (friend.lastName ?? "")
+    }
+    
+    func getUserImage(indexPath: IndexPath) -> UIImage? {
+        let friend = getUserByIndexPath(indexPath: indexPath)
+        if let image = friend.image {
+            return image
+        } else {
+            loadImage(indexPath: indexPath)
+            return nil
+        }
     }
     
     // DataSource

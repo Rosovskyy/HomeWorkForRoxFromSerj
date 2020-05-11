@@ -18,7 +18,7 @@ protocol EditConfiguratorProtocol: class {
 //
 // MARK: - Configurator
 //
-class EditConfigurator: EditConfiguratorProtocol {
+final class EditConfigurator: EditConfiguratorProtocol {
     func configure(with viewController: EditVC) {
         let presenter = VIPEREditPresenter(view: viewController)
         let interactor = EditInteractor(presenter: presenter)

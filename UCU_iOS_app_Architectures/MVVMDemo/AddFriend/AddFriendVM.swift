@@ -28,6 +28,7 @@ final class AddFriendVM {
     var profileImage = BehaviorRelay<UIImage>(value: UIImage())
     
     let userCreated = PublishRelay<User>()
+    let libraryTappedRelay = PublishRelay<Void>()
     
     // MARK: - Initialization
     init(userAPIClient: UserAPIClient = UserAPIClient(), imageAPIClient: ImageAPIClient = ImageAPIClient()) {
@@ -46,6 +47,10 @@ final class AddFriendVM {
         user.image = profileImage.value
         
         userCreated.accept(user)
+    }
+
+    func cellsCount() -> Int {
+        return 3
     }
     
     // MARK: - Private

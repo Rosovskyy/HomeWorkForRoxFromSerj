@@ -18,23 +18,28 @@ protocol MVCEditProfileViewControllerDelegate: class {
 //
 // MARK: - MVCEditProfileViewController
 //
-class MVCEditProfileViewController: UIViewController {
+final class MVCEditProfileViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var cityNameTextField: UITextField!
-    @IBOutlet weak var countryNameTextField: UITextField!
+    @IBOutlet private weak var firstNameTextField: UITextField!
+    @IBOutlet private weak var lastNameTextField: UITextField!
+    @IBOutlet private weak var cityNameTextField: UITextField!
+    @IBOutlet private weak var countryNameTextField: UITextField!
     
     // MARK: - Properties
     weak var delegate: MVCEditProfileViewControllerDelegate?
-    var user: User? = nil
+    private var user: User?
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
+    }
+    
+    // MARK: - Public
+    func setUser(user: User?) {
+        self.user = user
     }
     
     // MARK: - Private
@@ -52,20 +57,20 @@ class MVCEditProfileViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    private func checkTextFields() -> String? { // TextFields validations
+    private func emptyTextFieldsErrorMessage() -> String? { // TextFields validations
         var emptyValues = [String]()
-        let fieldsString = ["FirstName", "LastName", "CityName", "CountryName"]
+        let fieldsString = [firstNameTextField.id, lastNameTextField.id, cityNameTextField.id, countryNameTextField.id]
         for (index, textField) in [firstNameTextField, lastNameTextField, cityNameTextField, countryNameTextField].enumerated() {
             if let trimmed = textField?.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), trimmed.isEmpty {
                 emptyValues.append(fieldsString[index])
             }
         }
         
-        let equalOne = emptyValues.count == 1
-        let message = "Input \(equalOne ? "field" : "fields") \(emptyValues) \(equalOne ? "is" : "are") empty"
         if emptyValues.isEmpty {
             return nil
         } else {
+            let equalOne = emptyValues.count == 1
+            let message = "Input \(equalOne ? "field" : "fields") \(emptyValues) \(equalOne ? "is" : "are") empty"
             return message
         }
     }
@@ -99,7 +104,7 @@ class MVCEditProfileViewController: UIViewController {
     }
     
     @IBAction private func saveButtonDidTap() {
-        if let message = checkTextFields() {
+        if let message = emptyTextFieldsErrorMessage() {
             showEmptyFieldsAlert(message: message)
         } else {
             saveData()

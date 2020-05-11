@@ -43,7 +43,7 @@ final class MVVMFriendsViewController: UIViewController {
         } else if segue.identifier == "addFriendSegue", let navVC = segue.destination as? UINavigationController, let addFriendVC = navVC.viewControllers.first as? AddFriendViewController {
                 navVC.modalPresentationStyle = .overFullScreen
             
-            addFriendVC.didUserCreated = { [weak self] user in
+            addFriendVC.didCreateUser = { [weak self] user in
                 self?.viewModel.addNewUser(user: user)
             }
         }
@@ -67,8 +67,9 @@ final class MVVMFriendsViewController: UIViewController {
     
     private func prepareBind() {
         viewModel.reloadTableView.bind { [weak self] _ in
-            self?.tableView.reloadData()
-            MBProgressHUD.hide(for: self!.view, animated: true)
+            guard let self = self else { return }
+            self.tableView.reloadData()
+            MBProgressHUD.hide(for: self.view, animated: true)
         }.disposed(by: rx.disposeBag)
         
         viewModel.reloadCell.bind { [weak self] indexPath in
@@ -95,13 +96,8 @@ extension MVVMFriendsViewController: UITableViewDataSource {
         
         let userVM = viewModel.getCellViewModel(at: indexPath)
         cell.nameLabel.text = userVM.name
-        cell.locationLabel.text = viewModel.getLocation(indexPath: indexPath)
-        
-        if userVM.image == nil {
-            viewModel.loadImage(indexPath: indexPath)
-        } else {
-            cell.avatarImageView.image = userVM.image
-        }
+        cell.locationLabel.text = userVM.location
+        cell.avatarImageView.image = viewModel.getUserImage(indexPath: indexPath)
         
         return cell
     }

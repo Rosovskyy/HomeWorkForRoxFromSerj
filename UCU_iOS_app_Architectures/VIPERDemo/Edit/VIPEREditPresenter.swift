@@ -29,7 +29,7 @@ protocol VIPEREditViewProtocol: class {
 //
 // MARK: - Presenter
 //
-class VIPEREditPresenter: VIPEREditPresenterProtocol {
+final class VIPEREditPresenter: VIPEREditPresenterProtocol {
     
     // MARK: - Properties
     weak var view: VIPEREditViewProtocol!

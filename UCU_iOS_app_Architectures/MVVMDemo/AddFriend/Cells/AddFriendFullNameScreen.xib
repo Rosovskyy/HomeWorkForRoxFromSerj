@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddFriendFirstScreenCell" id="gTV-IL-0wX" customClass="AddFriendFirstScreenCell" customModule="UCU_iOS_app_Architectures" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddFriendFullNameScreen" id="gTV-IL-0wX" customClass="AddFriendFullNameScreen" customModule="UCU_iOS_app_Architectures" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="319" height="485"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

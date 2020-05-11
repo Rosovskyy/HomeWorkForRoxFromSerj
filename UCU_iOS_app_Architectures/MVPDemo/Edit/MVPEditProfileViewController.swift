@@ -19,24 +19,26 @@ protocol MVPEditProfileViewControllerDelegate: class {
 // MARK: - Presenter Protocol
 //
 protocol EditPresenterProtocol {
-    func checkTextFields(textFieldsData: [String?]) -> String?
+    func emptyTextFieldsErrorMessage(firstName: String?, lastName: String?, city: String?, country: String?)
+    func setUser(user: User?)
+    func saveData(firstName: String?, lastName: String?, city: String?, country: String?)
 }
 
 // MVP: View
 // -----------------
-class MVPEditProfileViewController: UIViewController, EditViewProtocol {
+final class MVPEditProfileViewController: UIViewController, EditViewProtocol {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var cityNameTextField: UITextField!
-    @IBOutlet weak var countryNameTextField: UITextField!
+    @IBOutlet private weak var firstNameTextField: UITextField!
+    @IBOutlet private weak var lastNameTextField: UITextField!
+    @IBOutlet private weak var cityNameTextField: UITextField!
+    @IBOutlet private weak var countryNameTextField: UITextField!
     
     // MARK: - Properties
     weak var delegate: MVPEditProfileViewControllerDelegate?
-    private let editPresenter = EditPresenter()
+    private var editPresenter: EditPresenterProtocol!
     
-    var user: User? = nil
+    var user: User?
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -50,18 +52,24 @@ class MVPEditProfileViewController: UIViewController, EditViewProtocol {
         let alert = UIAlertController(title: "Do you really want to save empty data?", message: message, preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Yes, save", style: .default, handler: { action in
-            self.saveData()
+            self.editPresenter.saveData(firstName: self.firstNameTextField.text, lastName: self.lastNameTextField.text, city: self.cityNameTextField.text, country: self.countryNameTextField.text)
         }))
         alert.addAction(UIAlertAction(title: "No, go back", style: .cancel, handler: nil))
 
         present(alert, animated: true)
     }
     
+    internal func saveData() {
+        delegate?.editProfileViewControllerDidSave(self)
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Private
     private func setupUI() {
         
         // Presenter
-        editPresenter.setViewDelegate(editViewProtocol: self)
+        editPresenter = EditPresenter(view: self)
+        editPresenter.setUser(user: user)
         
         // TextFields
         firstNameTextField.text = user?.firstName
@@ -73,18 +81,6 @@ class MVPEditProfileViewController: UIViewController, EditViewProtocol {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
     }
-    
-    private func saveData() {
-        user?.firstName = firstNameTextField.text
-        user?.lastName = lastNameTextField.text
-        
-        user?.city = cityNameTextField.text
-        user?.country = countryNameTextField.text
-        
-        delegate?.editProfileViewControllerDidSave(self)
-        
-        dismiss(animated: true, completion: nil)
-    }
 
     // MARK: - IBActions
     @IBAction private func cancelButtonDidTap() {
@@ -92,12 +88,7 @@ class MVPEditProfileViewController: UIViewController, EditViewProtocol {
     }
     
     @IBAction private func saveButtonDidTap() {
-        let textFieldsData = [firstNameTextField.text, lastNameTextField.text, cityNameTextField.text, countryNameTextField.text]
-        if let message = editPresenter.checkTextFields(textFieldsData: textFieldsData) {
-            showEmptyFieldsAlert(message: message)
-        } else {
-            saveData()
-        }
+        editPresenter.emptyTextFieldsErrorMessage(firstName: self.firstNameTextField.text, lastName: self.lastNameTextField.text, city: self.cityNameTextField.text, country: self.countryNameTextField.text)
     }
     
     // MARK: - OBJcActions

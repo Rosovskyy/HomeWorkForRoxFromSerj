@@ -12,6 +12,7 @@ import Foundation
 // MARK: - Presenter Delegate
 protocol EditViewProtocol: class {
     func showEmptyFieldsAlert(message: String)
+    func saveData()
 }
 
 //
@@ -26,31 +27,41 @@ final class EditPresenter: EditPresenterProtocol {
     private var user: User?
     
     // MARK: - Initialization
-    init(userAPIClient: UserAPIClient = UserAPIClient(), imageAPIClient: ImageAPIClient = ImageAPIClient()){
+    init(view: EditViewProtocol?, userAPIClient: UserAPIClient = UserAPIClient(), imageAPIClient: ImageAPIClient = ImageAPIClient()){
+        self.view = view
         self.userAPIClient = userAPIClient
         self.imageAPIClient = imageAPIClient
     }
     
-    func setViewDelegate(editViewProtocol: EditViewProtocol?) {
-        self.view = editViewProtocol
-    }
-    
     // MARK: - Protocol
-    func checkTextFields(textFieldsData: [String?]) -> String? {
+    func emptyTextFieldsErrorMessage(firstName: String?, lastName: String?, city: String?, country: String?) {
         var emptyValues = [String]()
         let fieldsString = ["FirstName", "LastName", "CityName", "CountryName"]
-        for (index, text) in textFieldsData.enumerated() {
+        for (index, text) in [firstName, lastName, city, country].enumerated() {
             if let trimmed = text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), trimmed.isEmpty {
                 emptyValues.append(fieldsString[index])
             }
         }
         
-        let equalOne = emptyValues.count == 1
-        let message = "Input \(equalOne ? "field" : "fields") \(emptyValues) \(equalOne ? "is" : "are") empty"
-        if emptyValues.isEmpty {
-            return nil
+        if !emptyValues.isEmpty {
+            let equalOne = emptyValues.count == 1
+            let message = "Input \(equalOne ? "field" : "fields") \(emptyValues) \(equalOne ? "is" : "are") empty"
+            view?.showEmptyFieldsAlert(message: message)
         } else {
-            return message
+            saveData(firstName: firstName, lastName: lastName, city: city, country: country)
         }
+    }
+    
+    func setUser(user: User?) {
+        self.user = user
+    }
+    
+    func saveData(firstName: String?, lastName: String?, city: String?, country: String?) {
+        user?.firstName = firstName
+        user?.lastName = lastName
+        user?.city = city
+        user?.country = country
+        
+        view?.saveData()
     }
 }

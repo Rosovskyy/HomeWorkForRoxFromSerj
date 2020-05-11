@@ -19,13 +19,13 @@ protocol FriendsRouterProtocol: class {
 //
 // MARK: - Router
 //
-class FriendsRouter: FriendsRouterProtocol {
+final class FriendsRouter: FriendsRouterProtocol {
   
     // MARK: - Properties
-    weak var viewController: FriendsVC!
+    weak var viewController: UIViewController!
     
     // MARK: - Initialization
-    init(viewController: FriendsVC) {
+    init(viewController: UIViewController) {
         self.viewController = viewController
     }
     
@@ -33,9 +33,11 @@ class FriendsRouter: FriendsRouterProtocol {
     func openFriendDetail(user: User) {
         let storyboard = UIStoryboard(name: "ViperStoryboard", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC {
-            vc.friend = user
             
+            vc.friend = user
             vc.modalPresentationStyle = .overFullScreen
+            vc.configurator.configure(with: vc)
+            
             viewController.present(vc, animated: true)
         }
     }
